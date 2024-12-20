@@ -58,6 +58,10 @@ require("lazy").setup({
 	spec = {
 		-- add your plugins here
 		{
+			"towolf/vim-helm",
+			event = "VeryLazy",
+		},
+		{
 			keys = {
 				{ "<leader>t", ":NERDTreeToggle<CR>", desc = "toggle nerdtree" },
 				{ "<leader>l", ":NERDTreeFind<CR>", desc = "nerdtree find" },
@@ -152,7 +156,6 @@ require("lazy").setup({
 						"vim",
 						"vimdoc",
 						"markdown",
-						"helm",
 						"python",
 						"javascript",
 						"go",
