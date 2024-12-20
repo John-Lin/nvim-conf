@@ -63,11 +63,16 @@ require("lazy").setup({
 				{ "<leader>l", ":NERDTreeFind<CR>", desc = "nerdtree find" },
 			},
 			"preservim/nerdtree",
+			event = "BufEnter", -- 當進入緩衝區（文件）時載入
 			config = function()
-				vim.cmd([[
-"  show hidden files
-let NERDTreeShowHidden=1
-		]])
+				vim.cmd([[let NERDTreeShowHidden=1]])
+				vim.api.nvim_create_autocmd("VimEnter", {
+					callback = function()
+						if vim.fn.argc() == 0 then
+							vim.cmd("NERDTree")
+						end
+					end,
+				})
 			end,
 			dependencies = {
 				"Xuyuanp/nerdtree-git-plugin",
@@ -141,6 +146,21 @@ let NERDTreeShowHidden=1
 			"nvim-treesitter/nvim-treesitter",
 			config = function()
 				require("nvim-treesitter.configs").setup({
+					ensure_installed = {
+						"c",
+						"lua",
+						"vim",
+						"vimdoc",
+						"markdown",
+						"python",
+						"javascript",
+						"go",
+						"terraform",
+						"yaml",
+						"json",
+						"vrl",
+						"zig",
+					},
 					incremental_selection = {
 						enable = true,
 						keymaps = {
@@ -461,3 +481,8 @@ cmp.setup.cmdline(":", {
 		{ name = "cmdline" },
 	}),
 })
+
+-- 具體高亮組
+vim.api.nvim_set_hl(0, "@lsp.type.variable.lua", { link = "Normal" })
+vim.api.nvim_set_hl(0, "Identifier", { link = "Normal" })
+vim.api.nvim_set_hl(0, "TSVariable", { link = "Normal" })
