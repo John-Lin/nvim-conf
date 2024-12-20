@@ -294,8 +294,28 @@ vim.api.nvim_create_autocmd("LspAttach", {
 require("mason").setup()
 require("mason-lspconfig").setup()
 
--- Setup lspconfig
+-- set up lspconfig
+local common_servers = {
+	"bashls",
+	"yamlls",
+	"pyright",
+}
+
+-- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+for _, server in pairs(common_servers) do
+	-- https://www.reddit.com/r/neovim/comments/mm1h0t/lsp_diagnostics_remain_stuck_can_someone_please/
+	require("lspconfig")[server].setup({
+		flags = {
+			allow_incremental_sync = false,
+			debounce_text_changes = 500,
+		},
+		on_attach = on_attach,
+		capabilities = capabilities,
+	})
+end
+
 require("neodev").setup({
 	-- add any options here, or leave empty to use the default settings
 })
@@ -334,21 +354,17 @@ require("lspconfig").lua_ls.setup({
 	},
 })
 
-require("lspconfig").pyright.setup({
-	capabilities = capabilities,
+-- terraform-ls
+require("lspconfig").terraformls.setup({})
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+	pattern = { "*.tf", "*.tfvars" },
+	callback = function()
+		vim.lsp.buf.format()
+	end,
 })
 
--- Configure `ruff-lsp`.
 -- See: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruff_lsp
 -- For the default config, along with instructions on how to customize the settings
-require("lspconfig").ruff.setup({
-	init_options = {
-		settings = {
-			-- Any extra CLI arguments for `ruff` go here.
-			args = {},
-		},
-	},
-})
 
 -- nvim cmp
 -- Set up nvim-cmp.
@@ -414,6 +430,10 @@ cmp.setup({
 		{ name = "buffer" },
 	}),
 })
+
+-- https://www.reddit.com/r/neovim/comments/sk70rk/using_github_copilot_in_neovim_tab_map_has_been/
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_assume_mapped = true
 
 -- Set configuration for specific filetype.
 cmp.setup.filetype("gitcommit", {
