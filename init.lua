@@ -152,6 +152,7 @@ require("lazy").setup({
 						"vim",
 						"vimdoc",
 						"markdown",
+						"helm",
 						"python",
 						"javascript",
 						"go",
