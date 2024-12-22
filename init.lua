@@ -36,9 +36,9 @@ vim.keymap.set("n", "<Leader>]", "<C-i>", opts)
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
 -- Bootstrap lazy.nvim
@@ -65,6 +65,7 @@ vim.cmd.colorscheme("base16-tomorrow-night")
 -- https://www.reddit.com/r/neovim/comments/sk70rk/using_github_copilot_in_neovim_tab_map_has_been/
 vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true
+vim.g.copilot_tab_fallback = ""
 
 -- 具體高亮組
 vim.api.nvim_set_hl(0, "@lsp.type.variable.lua", { link = "Normal" })

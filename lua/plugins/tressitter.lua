@@ -1,23 +1,30 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
 		config = function()
+			local enabled = {
+				"c",
+				"lua",
+				"vim",
+				"vimdoc",
+				"markdown",
+				"python",
+				"javascript",
+				"go",
+				"gomod",
+				"gosum",
+				"norg",
+				"terraform",
+				"json",
+				"vrl",
+				"zig",
+				"yaml",
+				"make",
+				"gitignore",
+			}
 			require("nvim-treesitter.configs").setup({
-				ensure_installed = {
-					"c",
-					"lua",
-					"vim",
-					"vimdoc",
-					"markdown",
-					"python",
-					"javascript",
-					"go",
-					"terraform",
-					"yaml",
-					"json",
-					"vrl",
-					"zig",
-				},
+				ensure_installed = enabled,
 				incremental_selection = {
 					enable = true,
 					keymaps = {
