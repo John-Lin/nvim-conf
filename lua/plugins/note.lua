@@ -7,9 +7,12 @@ return {
 			require("neorg").setup({
 				load = {
 					["core.defaults"] = {}, -- Loads default behaviour
+					["core.completion"] = { config = { engine = "nvim-cmp", name = "[Norg]" } },
+					["core.export.markdown"] = { config = { extensions = "all" } },
 					["core.concealer"] = {
 						config = {
 							icon_preset = "basic",
+							folds = false,
 							icons = {
 								delimiter = {
 									horizontal_line = {
@@ -22,7 +25,7 @@ return {
 									uncertain = { icon = "⁇" },
 									on_hold = { icon = "⏸" },
 									cancelled = { icon = "⏏" },
-									undone = { icon = "■" },
+									undone = { icon = " " },
 								},
 								code_block = {
 									-- If true will only dim the content of the code block (without the
