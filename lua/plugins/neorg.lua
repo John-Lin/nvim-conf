@@ -14,6 +14,7 @@ return {
 					["core.defaults"] = {}, -- Loads default behaviour
 					["core.completion"] = { config = { engine = "nvim-cmp", name = "[Norg]" } },
 					["core.export.markdown"] = { config = { extensions = "all" } },
+					["core.qol.toc"] = {},
 					["core.concealer"] = {
 						config = {
 							icon_preset = "basic",

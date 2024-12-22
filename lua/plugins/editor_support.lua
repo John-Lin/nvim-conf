@@ -28,4 +28,12 @@ return {
 			require("Comment").setup()
 		end,
 	},
+	-- {
+	-- 	"echasnovski/mini.trailspace",
+	-- 	version = false,
+	-- 	only_in_normal_buffers = true,
+	-- 	config = function()
+	-- 		require("mini.trailspace").setup()
+	-- 	end,
+	-- },
 }
