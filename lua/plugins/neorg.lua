@@ -13,6 +13,7 @@ return {
 				load = {
 					["core.defaults"] = {}, -- Loads default behaviour
 					["core.completion"] = { config = { engine = "nvim-cmp", name = "[Norg]" } },
+					["core.integrations.nvim-cmp"] = {},
 					["core.export.markdown"] = { config = { extensions = "all" } },
 					["core.qol.toc"] = {},
 					["core.concealer"] = {

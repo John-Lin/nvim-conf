@@ -7,35 +7,29 @@ return {
 		build = ":MasonUpdate", -- :MasonUpdate updates registry contents
 		config = function()
 			require("mason").setup()
-			require("mason-lspconfig").setup()
+			require("mason-lspconfig").setup({
+				ensure_installed = { "lua_ls", "gopls", "pyright", "terraformls", "zls", "yamlls" },
+			})
 		end,
 	},
 	{
-		event = "VeryLazy",
-		"jose-elias-alvarez/null-ls.nvim",
-		config = function()
-			local null_ls = require("null-ls")
-
-			local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-			null_ls.setup({
-				sources = {
-					null_ls.builtins.formatting.stylua,
-					null_ls.builtins.formatting.ruff,
-				},
-				on_attach = function(client, bufnr)
-					if client.supports_method("textDocument/formatting") then
-						vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-						vim.api.nvim_create_autocmd("BufWritePre", {
-							group = augroup,
-							buffer = bufnr,
-							callback = function()
-								-- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-								vim.lsp.buf.format({ bufnr = bufnr })
-							end,
-						})
-					end
-				end,
+		"nvimtools/none-ls.nvim", -- none-ls is an active community fork of null-ls
+		opts = function(_, opts)
+			local nls = require("null-ls")
+			opts.sources = vim.list_extend(opts.sources or {}, {
+				nls.builtins.formatting.shfmt,
+				-- nls.builtins.code_actions.shellcheck,
+				-- for go
+				nls.builtins.formatting.gofmt,
+				nls.builtins.formatting.goimports,
+				nls.builtins.code_actions.gomodifytags,
+				nls.builtins.code_actions.impl,
+				-- for lua
+				nls.builtins.formatting.stylua,
+				-- for python
+				nls.builtins.formatting.black,
 			})
+			return opts
 		end,
 	},
 	{
@@ -126,6 +120,39 @@ return {
 						vim.lsp.buf.format()
 					end,
 				}),
+			})
+
+			-- Setup go language server gopls
+			require("lspconfig").gopls.setup({
+				capabilities = capabilities,
+				on_attach = on_attach,
+				cmd = { "gopls" },
+				root_dir = require("lspconfig").util.root_pattern(".git", "go.mod", "."),
+				filetypes = { "go", "gomod", "gowork", "gotmpl" },
+				settings = {
+					gopls = {
+						completeUnimported = true,
+						usePlaceholders = true,
+						analyses = {
+							unusedparams = true,
+						},
+						staticcheck = true,
+						gofumpt = true,
+					},
+				},
+			})
+
+			require("lspconfig").yamlls.setup({
+				settings = {
+					yaml = {
+						schemas = {
+							["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+							["https://json.schemastore.org/kustomization.json"] = "kustomization.yaml",
+							["https://json.schemastore.org/chart.json"] = "Chart.yaml",
+							["https://json.schemastore.org/chart-lock.json"] = "Chart.lock",
+						},
+					},
+				},
 			})
 		end,
 	},
