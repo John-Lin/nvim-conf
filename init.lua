@@ -3,10 +3,10 @@ set.number = true
 set.encoding = "UTF-8"
 set.relativenumber = true
 set.clipboard = "unnamed"
-vim.o.tabstop = 4 -- A TAB character looks like 4 spaces
+vim.o.tabstop = 4      -- A TAB character looks like 4 spaces
 vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
-vim.o.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
-vim.o.shiftwidth = 4 -- Number of spaces inserted when indenting
+vim.o.softtabstop = 4  -- Number of spaces inserted instead of a TAB character
+vim.o.shiftwidth = 4   -- Number of spaces inserted when indenting
 
 -- Undo persistence
 vim.opt.undodir = vim.fn.stdpath("cache") .. "/nvim/undodir"
@@ -14,12 +14,12 @@ vim.opt.undofile = true
 
 -- highlight after yank
 vim.api.nvim_create_autocmd("TextYankPost", {
-	pattern = { "*" },
-	callback = function()
-		vim.highlight.on_yank({
-			timeout = 50,
-		})
-	end,
+    pattern = { "*" },
+    callback = function()
+        vim.highlight.on_yank({
+            timeout = 50,
+        })
+    end,
 })
 
 -- keybindings
@@ -48,17 +48,17 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-	if vim.v.shell_error ~= 0 then
-		vim.api.nvim_echo({
-			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-			{ out, "WarningMsg" },
-			{ "\nPress any key to exit..." },
-		}, true, {})
-		vim.fn.getchar()
-		os.exit(1)
-	end
+    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+    if vim.v.shell_error ~= 0 then
+        vim.api.nvim_echo({
+            { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+            { out,                            "WarningMsg" },
+            { "\nPress any key to exit..." },
+        }, true, {})
+        vim.fn.getchar()
+        os.exit(1)
+    end
 end
 vim.opt.rtp:prepend(lazypath)
 -- Setup lazy.nvim
@@ -77,22 +77,22 @@ vim.api.nvim_set_hl(0, "@variable.builtin.vim", { link = "Normal" })
 
 -- 設置命令行模式的鍵映射
 local function cnoremap(lhs, rhs)
-	vim.api.nvim_set_keymap("c", lhs, rhs, { noremap = true, silent = true })
+    vim.api.nvim_set_keymap("c", lhs, rhs, { noremap = true, silent = true })
 end
 
 -- set history size
 vim.o.history = 500
 -- Bash-like command mapping
-cnoremap("<C-a>", "<Home>") -- Ctrl+A 跳到行首
-cnoremap("<C-e>", "<End>") -- Ctrl+E 跳到行尾
-cnoremap("<C-b>", "<Left>") -- Ctrl+B 向左移動一個字符
+cnoremap("<C-a>", "<Home>")  -- Ctrl+A 跳到行首
+cnoremap("<C-e>", "<End>")   -- Ctrl+E 跳到行尾
+cnoremap("<C-b>", "<Left>")  -- Ctrl+B 向左移動一個字符
 cnoremap("<C-f>", "<Right>") -- Ctrl+F 向右移動一個字符
-cnoremap("<C-d>", "<Del>") -- Ctrl+D 刪除光標所在字符
-cnoremap("<C-_>", "<C-f>") -- Ctrl+_ 映射為 Ctrl+F
+cnoremap("<C-d>", "<Del>")   -- Ctrl+D 刪除光標所在字符
+cnoremap("<C-_>", "<C-f>")   -- Ctrl+_ 映射為 Ctrl+F
 
 -- 歷史記錄導航
 cnoremap("<C-n>", "<Down>") -- Ctrl+N 下一條歷史記錄
-cnoremap("<C-p>", "<Up>") -- Ctrl+P 上一條歷史記錄
+cnoremap("<C-p>", "<Up>")   -- Ctrl+P 上一條歷史記錄
 
 -- 行首快捷映射
 cnoremap("<C-*>", "<C-a>") -- Ctrl+* 映射為 Ctrl+A

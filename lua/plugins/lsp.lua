@@ -8,7 +8,7 @@ return {
 		config = function()
 			require("mason").setup()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "gopls", "pyright", "terraformls", "zls", "yamlls" },
+				ensure_installed = { "lua_ls", "gopls", "pyright", "terraformls", "zls", "yamlls", "ruff" },
 			})
 		end,
 	},
@@ -108,8 +108,24 @@ return {
 				},
 			})
 
+			require("lspconfig").ruff.setup({
+				capabilities = capabilities,
+			})
+
 			require("lspconfig").pyright.setup({
 				capabilities = capabilities,
+				-- https://docs.astral.sh/ruff/editors/setup/#neovim
+				settings = {
+					-- Using Ruff's import organizer
+					pyright = { disableOrganizeImports = true },
+					python = {
+                        pythonPath = ".venv/bin/python",
+						analysis = {
+							-- Ignore all files for analysis to exclusively use Ruff for linting
+							ignore = { "*" },
+						},
+					},
+				},
 			})
 
 			require("lspconfig").terraformls.setup({
