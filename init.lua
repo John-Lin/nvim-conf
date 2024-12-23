@@ -7,6 +7,8 @@ vim.o.tabstop = 4 -- A TAB character looks like 4 spaces
 vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
 vim.o.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
 vim.o.shiftwidth = 4 -- Number of spaces inserted when indenting
+-- neorg needed. see https://github.com/nvim-neorg/neorg/issues/969
+vim.o.conceallevel = 2
 
 -- highlight after yank
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -59,8 +61,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 -- Setup lazy.nvim
 require("lazy").setup("plugins")
--- color scheme
-vim.cmd.colorscheme("base16-tomorrow-night")
 
 -- https://www.reddit.com/r/neovim/comments/sk70rk/using_github_copilot_in_neovim_tab_map_has_been/
 vim.g.copilot_no_tab_map = true
