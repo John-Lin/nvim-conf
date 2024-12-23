@@ -8,6 +8,7 @@ return {
 				"lua",
 				"vim",
 				"vimdoc",
+				"query",
 				"markdown",
 				"python",
 				"javascript",

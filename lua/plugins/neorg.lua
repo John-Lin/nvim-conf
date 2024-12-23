@@ -6,7 +6,7 @@ return {
 	},
 	{
 		"nvim-neorg/neorg",
-		build = ":Neorg sync-parsers",
+		lazy = false,
 		dependencies = { "luarocks.nvim" },
 		config = function()
 			require("neorg").setup({
@@ -66,6 +66,12 @@ return {
 							},
 						},
 					},
+					["core.keybinds"] = {
+						-- https://github.com/nvim-neorg/neorg/blob/main/lua/neorg/modules/core/keybinds/keybinds.lua
+						config = {
+							default_keybinds = true,
+						},
+					},
 					["core.dirman"] = { -- Manages Neorg workspaces
 						config = {
 							workspaces = {
@@ -77,6 +83,8 @@ return {
 					},
 				},
 			})
+			vim.wo.foldlevel = 99
+			vim.wo.conceallevel = 2
 		end,
 	},
 }
