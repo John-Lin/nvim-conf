@@ -30,6 +30,7 @@
   "plenary.nvim": { "branch": "master", "commit": "2d9b06177a975543726ce5c73fca176cedbffe9d" },
   "telescope.nvim": { "branch": "master", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
   "vim-devicons": { "branch": "master", "commit": "71f239af28b7214eebb60d4ea5bd040291fb7e33" },
+  "vim-fugitive": { "branch": "master", "commit": "fcb4db52e7f65b95705aa58f0f2df1312c1f2df2" },
   "vim-helm": { "branch": "master", "commit": "ae1ebc160d2b9b90108477ab10df7a4fc501e358" },
   "which-key.nvim": { "branch": "main", "commit": "8ab96b38a2530eacba5be717f52e04601eb59326" }
 }
