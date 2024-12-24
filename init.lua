@@ -3,6 +3,7 @@ set.number = true
 set.encoding = "UTF-8"
 set.relativenumber = true
 set.clipboard = "unnamed"
+
 vim.o.tabstop = 4 -- A TAB character looks like 4 spaces
 vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
 vim.o.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
@@ -37,13 +38,6 @@ vim.keymap.set("n", "<Leader>v", "<C-w>v", opts)
 vim.keymap.set("n", "<Leader>s", "<C-w>s", opts)
 vim.keymap.set("n", "<Leader>[", "<C-o>", opts)
 vim.keymap.set("n", "<Leader>]", "<C-i>", opts)
-
--- Global mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
