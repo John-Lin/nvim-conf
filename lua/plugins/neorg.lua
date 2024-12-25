@@ -6,8 +6,8 @@ return {
 	},
 	{
 		"nvim-neorg/neorg",
-		-- lazy = false,
-		event = "VeryLazy",
+		ft = "norg", -- lazy load on file type
+		version = "*",
 		dependencies = { "luarocks.nvim" },
 		config = function()
 			require("neorg").setup({
@@ -17,6 +17,7 @@ return {
 					["core.integrations.nvim-cmp"] = {},
 					["core.export.markdown"] = { config = { extensions = "all" } },
 					["core.qol.toc"] = {},
+					["core.summary"] = {},
 					["core.concealer"] = {
 						config = {
 							icon_preset = "basic",
@@ -79,7 +80,6 @@ return {
 						config = {
 							workspaces = {
 								notes = "~/Documents/common/neorg/notes",
-								work = "~/Documents/common/neorg/work",
 							},
 							default_workspace = "notes",
 						},
