@@ -13,6 +13,11 @@ vim.o.shiftwidth = 4 -- Number of spaces inserted when indenting
 vim.opt.undodir = vim.fn.stdpath("cache") .. "/nvim/undodir"
 vim.opt.undofile = true
 
+-- smaller updatetime for gitgutter
+vim.opt.updatetime = 100
+-- always show signcolumns
+vim.opt.signcolumn = "yes"
+
 -- highlight after yank
 vim.api.nvim_create_autocmd("TextYankPost", {
 	pattern = { "*" },
