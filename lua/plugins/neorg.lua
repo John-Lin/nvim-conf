@@ -6,7 +6,9 @@ return {
 	},
 	{
 		"nvim-neorg/neorg",
-		ft = "norg", -- lazy load on file type
+		-- lazy load on file type
+		-- ft = "norg",
+		lazy = false,
 		version = "*",
 		dependencies = { "luarocks.nvim" },
 		config = function()
